@@ -7,17 +7,19 @@ public class EmployeeWageComputation {
     public static final int IS_FULL_TIME = 1;
     public static final int EMP_RATE_PER_HOUR = 20;
     private static final int NUM_WORKING_DAYS = 20 ;
+    private static final int MAX_WORKING_HRS_IN_MONTH = 100;
 
     public static void main(String[] args) {
         System.out.println("Welcome to the employee wage computation program");
 
         int empHrs = 0;
-        int empWage = 0;
-        int totalEmpWage = 0;
+        int totalEmpHrs = 0;
+        int totalWorkingDays = 0;
 
         Random random = new Random();
 
-        for (int day = 0; day < NUM_WORKING_DAYS; day++) {
+        while( totalEmpHrs <= MAX_WORKING_HRS_IN_MONTH  && totalWorkingDays < NUM_WORKING_DAYS) {
+            totalWorkingDays ++;
             int employeeCheck = random.nextInt(3);
             switch (employeeCheck) {
                 case IS_FULL_TIME:
@@ -29,10 +31,10 @@ public class EmployeeWageComputation {
                 default:
                     empHrs = 0;
             }
-            empWage = empHrs * EMP_RATE_PER_HOUR;
-            totalEmpWage += empWage;
-            System.out.println( "Day "+ day +" Employee wage : " + empWage);
+            totalEmpHrs += empHrs;
+            System.out.println( "Day "+ totalWorkingDays +" Employee working hours : " + empHrs);
         }
+        int totalEmpWage = totalEmpHrs * EMP_RATE_PER_HOUR;
         System.out.println("Total employee wage : " +totalEmpWage);
     }
 }
